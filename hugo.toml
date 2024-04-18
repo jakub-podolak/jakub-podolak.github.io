@@ -1,0 +1,15 @@
+baseURL = 'https://jakub-podolak@github.io/'
+languageCode = 'en-us'
+title = 'Jakub Podolak'
+
+theme = "cyberscape"
+
+# Enable this for tailwind in markdown files
+[markup.goldmark.renderer]
+unsafe=true
+
+# Add menu links to things from /content/ here (eg. markdown.md)
+[[menu.main]]
+name = "About"
+url = "/posts/about/"
+weight = 1
