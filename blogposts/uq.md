@@ -7,7 +7,7 @@ parent: Blogposts
 # When and Why Do Uncertainty Quantification Methods for LLMs Work?
 
 <div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
-⚠️ <strong>Note:</strong> As of 19.03.2025 this work is still in progress. Contents may change.
+⚠️ <strong>Note:</strong> As of 24.03.2025 this work is still in progress. Contents may change.
 </div>
 
 ## Why do Uncertainty Quantification methods matter?
@@ -109,23 +109,22 @@ Through these experiments, we aim to deliver actionable insights into which unce
 ## Changelog:
 
 - 19.03.2025: Added introduction, motivation, descriptions of existing methods and research questions
+- 24.03.2025: Fixed the references links
 
-## TODO: fix references
-
-[Dubey et al. 2024]: https://arxiv.org/abs/2404.01091
-[Huang et al. 2023]: https://arxiv.org/abs/2309.01219
+[Dubey et al. 2024]: https://arxiv.org/abs/2407.21783
+[Huang et al. 2023]: https://arxiv.org/abs/2311.05232
 [Guo et al. 2017]: https://arxiv.org/abs/1706.04599
-[Dhuliawala et al. 2022]: https://arxiv.org/abs/2207.05221
-[Farquhar et al. 2024]: https://arxiv.org/abs/2305.14335
-[Detommaso et al. 2024]: https://arxiv.org/abs/2307.10142
-[Xiong et al. 2024]: https://arxiv.org/abs/2310.04525
-[Yang et al. 2024]: https://arxiv.org/abs/2402.12352
-[Pawitan et al. 2024]: https://arxiv.org/abs/2401.10963
-[Jurayj et al. 2025]: https://arxiv.org/abs/2308.11087
-[Ni et al. 2024]: https://arxiv.org/abs/2402.09924
-[Wei et al. 2024]: https://arxiv.org/abs/2402.01403
-[Zhang et al. 2024]: https://arxiv.org/abs/2403.12111
+[Dhuliawala et al. 2022]: https://aclanthology.org/2022.findings-acl.133/
+[Farquhar et al. 2024]: https://www.nature.com/articles/s41586-024-07421-0
+[Detommaso et al. 2024]: https://arxiv.org/abs/2404.04689
+[Xiong et al. 2024]: https://arxiv.org/abs/2306.13063
+[Yang et al. 2024]: https://arxiv.org/abs/2412.14737
+[Pawitan et al. 2024]: https://arxiv.org/abs/2412.15296
+[Jurayj et al. 2025]: https://arxiv.org/abs/2502.13962
+[Ni et al. 2024]: https://arxiv.org/abs/2408.09773
+[Wei et al. 2024]: https://arxiv.org/abs/2411.04368
+[Zhang et al. 2024]: https://arxiv.org/abs/2404.02655
 [Kadavath et al. 2022]: https://arxiv.org/abs/2207.05221
-[Tian et al. 2023]: https://arxiv.org/abs/2210.03918
+[Tian et al. 2023]: https://arxiv.org/abs/2305.14975
 [Joshi et al. 2017]: https://arxiv.org/abs/1705.03551
 [Hendrycks et al. 2021]: https://arxiv.org/abs/2009.03300
