@@ -130,7 +130,7 @@ Effective uncertainty quantification (UQ) methods should reliably distinguish co
   </figcaption>
 </figure>
 
-Our findings show:
+Our findings suggest:
 
 - **Domain Sensitivity**: A method can excel in one domain yet fail in another. For instance, Gemma’s verbalized confidence proved to be reliable on history questions but degraded to near-random performance for ethics.
 - **Semantic Probabilities Perform Well**: Approaches using semantic probabilities—where confidence is inferred from the frequency or entropy of multiple generated answers—tended to perform robustly across all categories. This supports earlier evidence that aggregating multiple samples can yield more stable and accurate UQ scores ([Farquhar et al. 2024]).
@@ -138,12 +138,54 @@ Our findings show:
 - **Verbalized Confidence Limitations**: For questions requiering deeper reasoning (e.g., multi-step or causal explanations), verbalized confidence often yielded near random performance. On the other hand, semantic probability approaches retained moderate effectiveness, suggesting that repeated sampling, or generally test-time compute, can capture uncertainty better than a single, direct report from the model.
 - **Commonsense Challenges**: In questions covering ethics or broad commonsense scenarios, all methods struggled. We hypothesize that the model’s internal “worldview,” fuzzy ground-truth labels, and limited understanding of complex human dynamics may lead to both over- and under-confidence in this domain.
 
+Because of an exploratory nature of our work, these findings cannot be treated as definitive and generalizable facts but rather as observations of models behavior.
+
+---
+
+## Semantic Multicalibration - Calibration Error Across Domains and UQ Methods (February 2025)
+
+Prior studies (e.g., [Detommaso et al. 2024]) highlight that calibration errors can vary significantly across domains—a phenomenon sometimes referred to as multicalibration. We hypothesize that the same occurs across different notions of uncertainty. To investigate this, we computed the Average Squared Calibration Error (ASCE) for various UQ approaches and compared them to ground-truth correctness labels. Our results confirm that models are not uniformly calibrated across domains or question types.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/calibration_across_domains.png" alt="UQ methods calibration errors" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 4.</strong> <em>Calibration errors across different domains and notions of uncertainty.</em>
+  </figcaption>
+</figure>
+
+For example, in TriviaQA with the Llama model, the ethics category exhibits high calibration error when using verbalized confidence but lower error for semantic probabilities. In contrast, the law category shows the opposite pattern. This discrepancy underscores how calibration in one domain or definition of uncertainty does not necessarily translate to accurate calibration in another. This emphasizes the importance of domain and task-specific UQ strategies.
+
+---
+
+## Verbalized Score Effectiveness vs Model's Correctness (March 2025)
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/verbalized_score_accuracy_vs_calibration.png" alt="UQ methods calibration errors" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 4.</strong> <em>Verbalized score effectivenss and calibration errors vs question difficulty.</em>
+  </figcaption>
+</figure>
+
+We observe that verbalized confidence performs best on easier domains, that is ones with higher correctness of answers. For such domains the calibration errors tend to be lower as well. These domains - often sports, literature, history, science - feature straightforward, fact-based questions with minimal ambiguity. Consistent with our earlier observations, such fact-retrieval tasks lend themselves to more accurate self-reported confidence.
+
+---
+
+## ⚙️🛠️🚧 Longer Reasoning vs Verbalized Score Effectiveness (Planned for March & April 2025)
+
+In earlier work, [Jurayj et al. 2025] demonstrated that longer reasoning budgets improve overall question-answering performance in selective QA contexts—though their analysis centered on token-level confidence and just math questions. In contrast, our upcoming experiments will focus on how extended reasoning affects verbalized confidence. We want to see if producing more detailed or iterative reasoning steps (e.g., using Deepseek R1’s think-before-you-answer finetuning) with a forced budget ([Muennighoff et al. 2025]) makes the model overconfident, more consistent, or potentially better calibrated than simpler baselines. A key question is whether domain-specific differences persist when the model expend more computational effort on each answer.
+
+---
+
+## ⚙️🛠️🚧 Test-Time Compute Budget vs UQ Estimates (Planned for April 2025)
+
+Techniques like semantic entropy require multiple forward passes and thus demand higher test-time compute budgets. In this experiment, we plan to equalize test-time budgets across methods to investigate whether a single, carefully reasoned verbalized estimate can rival generation frequency strategies. Specifically, we’ll compare verbalized confidence and semantic probabilities, under identical compute constraints forced by method suggested by [Muennighoff et al. 2025].
+
 ---
 
 ## Changelog:
 
 - 19.03.2025: Added introduction, motivation, descriptions of existing methods and research questions
-- 24.03.2025: Fixed the references links, backfilled experiments from Feb and early March
+- 24.03.2025: Fixed the references links, backfilled experiments from Feb and early March, added planned experiments
 
 [Dubey et al. 2024]: https://arxiv.org/abs/2407.21783
 [Huang et al. 2023]: https://arxiv.org/abs/2311.05232
@@ -163,3 +205,4 @@ Our findings show:
 [Joshi et al. 2017]: https://arxiv.org/abs/1705.03551
 [Hendrycks et al. 2021]: https://arxiv.org/abs/2009.03300
 [Snell et al. 2024]: https://arxiv.org/abs/2408.03314
+[Muennighoff et al. 2025]: https://arxiv.org/abs/2501.19393
