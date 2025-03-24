@@ -10,6 +10,10 @@ parent: Blogposts
 ⚠️ <strong>Note:</strong> As of 24.03.2025 this work is still in progress. Contents may change.
 </div>
 
+<div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
+⚠️ <strong>Note:</strong> This blogpost covers only a part of all the experiments and highlights just the top conclusions. A full paper will follow soon.
+</div>
+
 ## Why do Uncertainty Quantification methods matter?
 
 Large Language Models (LLMs), such as GPT, LLaMA, and Phi, can produce impressive, human-like responses on a wide variety of tasks—from answering trivia questions to writing Python code ([Dubey et al. 2024]). Despite their impressive capabilities, these models may produce incorrect answers while maintaining high confidence and sounding plausible - an issue often referred to as **hallucinations** ([Huang et al. 2023]).
@@ -21,6 +25,7 @@ Although numerous uncertainty quantification methods exist, it's still unclear w
 In particular, easy-to-use methods like **Verbalized Confidence**, where a model explicitly states its certainty (e.g., "I'm 80% sure"), might seem appealing but could be unreliable or overly confident in some contexts. This work aims to systematically assess when and why these discrepancies occur, providing insights into the practical use of uncertainty quantification methods.
 
 This blog post explores why and when certain UQ methods succeed or fail. Gaining this understanding is crucial not only for building safer AI systems but also for deepening our knowledge of how these powerful models behave and when we can trust them.
+Furthermore, it explores how Test Time Compute techniques ([Snell et al. 2024]) - that is methods that rely on longer model inference via extensive sampling or reasoning - impact models confidence assessment, providing valuable insights about these upcoming methods.
 
 <figure style="text-align: center; margin-bottom: 20px; margin-top: 4em">
   <img src="/assets/images/semantic_discrepancies.png" alt="Discrepancy between UQ methods" style="max-width: 500px; width: 100%;">
@@ -53,13 +58,13 @@ Several methods exist for quantifying the uncertainty of LLM-generated answers:
    Using the raw probabilities of individual tokens as indicators of model confidence ([Dhuliawala et al. 2022]).
 
 2. **Semantic Consistency:**  
-   Generating multiple answers with slight variations (using higher randomness, i.e., higher temperature) and measuring agreement among the answers ([Farquhar et al. 2024]).
+   Generating multiple answers with slight variations (using higher randomness, i.e., higher temperature) and measuring agreement among the answers ([Farquhar et al. 2024]). We can measure probability of generating given output (Semantic Probability) or entropy among the answers (Semantic Entropy).
 
 3. **True/False Scoring:**  
    Asking the model separately if its answer is true or false, then taking the probability of the model answering "True" as its confidence ([Detommaso et al. 2024]).
 
 4. **Verbalized Confidence:**  
-   A more user-friendly method where the model explicitly states its confidence as a percentage (e.g., "I'm 85% confident in this answer.") ([Xiong et al. 2024]; [Yang et al. 2024]).
+   A more user-friendly method where the model explicitly states its confidence as a percentage (e.g., "I'm 85% confident in this answer.") ([Xiong et al. 2024]; [Yang et al. 2024]). We distinguish between Verbalized Score where we ask the model to assess the correctness of generated response, and Verbalized Self Score, where the model gives confidence estimate as part of the response.
 
 ---
 
@@ -92,9 +97,9 @@ Given these complexities, our research seeks to answer the following questions:
 
 ---
 
-## Planned Experiments
+## Experimental Setup
 
-To explore these questions, we're planning experiments using popular question-answering datasets like TriviaQA ([Joshi et al. 2017]), MMLU ([Hendrycks et al. 2021]), and SimpleQA ([Wei et al. 2024]), enriched with domain-specific tags (sports, culture, reasoning complexity).
+To explore these questions, we're planning experiments using popular question-answering datasets like TriviaQA ([Joshi et al. 2017]), MMLU ([Hendrycks et al. 2021]), and SimpleQA ([Wei et al. 2024]), enriched with domain-specific tags (sports, culture, reasoning complexity). We will use Llama3.1-8b-instruct and Gemma2 for UQ methods investigation across question types, and Deepseek R1 32B for experiments that require reasoning.
 
 We'll perform:
 
@@ -106,10 +111,39 @@ Through these experiments, we aim to deliver actionable insights into which unce
 
 ---
 
+## UQ Methods Effectiveness Across Question Types (February 2025)
+
+Effective uncertainty quantification (UQ) methods should reliably distinguish correct from incorrect responses across a variety of domains and question types. In our study, we labeled a QA dataset with domain and complexity tags (e.g., history, ethics, commonsense)—partly automated via GPT-4o-mini—and then evaluated multiple UQ approaches on each category. We measured performance by treating UQ scores as inputs to a binary classification task (correct vs. incorrect answers) and calculating the ROC AUC.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/llama31_rocauc_triviaqa.png" alt="UQ methods effectiveness" style="max-width: 45%; margin: 0 10px;">
+  <img src="/assets/images/gemma2_rocauc_mmlu.png" alt="UQ methods effectiveness" style="max-width: 45%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 2.</strong> <em>ROC AUC scores for UQ methods across question domains in subsets of MMLU and TriviaQA, evaluated on Llama3.1 and Gemma2.</em>
+  </figcaption>
+</figure>
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/methods_effectiveness_across_types.png" alt="UQ methods effectiveness" style="max-width: 60%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 3.</strong> <em>Comparison of UQ methods on different question types (e.g., factual, commonsense, ethics), also reported as ROC AUC.</em>
+  </figcaption>
+</figure>
+
+Our findings show:
+
+- **Domain Sensitivity**: A method can excel in one domain yet fail in another. For instance, Gemma’s verbalized confidence proved to be reliable on history questions but degraded to near-random performance for ethics.
+- **Semantic Probabilities Perform Well**: Approaches using semantic probabilities—where confidence is inferred from the frequency or entropy of multiple generated answers—tended to perform robustly across all categories. This supports earlier evidence that aggregating multiple samples can yield more stable and accurate UQ scores ([Farquhar et al. 2024]).
+- **Strongest Results on Fact-Retrieval**: All UQ methods, including verbalized confidence, worked best for straightforward fact-retrieval questions (e.g., sports trivia, basic historical facts).
+- **Verbalized Confidence Limitations**: For questions requiering deeper reasoning (e.g., multi-step or causal explanations), verbalized confidence often yielded near random performance. On the other hand, semantic probability approaches retained moderate effectiveness, suggesting that repeated sampling, or generally test-time compute, can capture uncertainty better than a single, direct report from the model.
+- **Commonsense Challenges**: In questions covering ethics or broad commonsense scenarios, all methods struggled. We hypothesize that the model’s internal “worldview,” fuzzy ground-truth labels, and limited understanding of complex human dynamics may lead to both over- and under-confidence in this domain.
+
+---
+
 ## Changelog:
 
 - 19.03.2025: Added introduction, motivation, descriptions of existing methods and research questions
-- 24.03.2025: Fixed the references links
+- 24.03.2025: Fixed the references links, backfilled experiments from Feb and early March
 
 [Dubey et al. 2024]: https://arxiv.org/abs/2407.21783
 [Huang et al. 2023]: https://arxiv.org/abs/2311.05232
@@ -128,3 +162,4 @@ Through these experiments, we aim to deliver actionable insights into which unce
 [Tian et al. 2023]: https://arxiv.org/abs/2305.14975
 [Joshi et al. 2017]: https://arxiv.org/abs/1705.03551
 [Hendrycks et al. 2021]: https://arxiv.org/abs/2009.03300
+[Snell et al. 2024]: https://arxiv.org/abs/2408.03314
