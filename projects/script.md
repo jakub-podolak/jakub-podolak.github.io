@@ -1,7 +1,7 @@
 ---
 title: "Limits of JS scripting inside Jekyll Github Page"
-layout: home
-parent: Random
+layout: post
+parent: Projects and Blogposts
 ---
 
 # Limits of JS scripting inside Jekyll Github Page

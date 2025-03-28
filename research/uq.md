@@ -1,7 +1,7 @@
 ---
 title: "When and why do Uncertainty Quantification Methods for LLMs Work?"
-layout: home
-parent: Blogposts
+layout: post
+parent: Research
 ---
 
 # When and Why Do Uncertainty Quantification Methods for LLMs Work?
