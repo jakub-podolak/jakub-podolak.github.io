@@ -7,7 +7,7 @@ parent: Research
 # When and Why Do Uncertainty Quantification Methods for LLMs Work?
 
 <div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
-⚠️ <strong>Note:</strong> As of 24.03.2025 this work is still in progress. Contents may change.
+⚠️ <strong>Note:</strong> As of 08.04.2025 this work is still in progress. Contents may change.
 </div>
 
 <div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
@@ -170,15 +170,86 @@ We observe that verbalized confidence performs best on easier domains, that is o
 
 ---
 
-## ⚙️🛠️🚧 Longer Reasoning vs Verbalized Score Effectiveness (Planned for March & April 2025)
+## Longer Reasoning vs Verbalized Score Effectiveness (March & April 2025)
 
-In earlier work, [Jurayj et al. 2025] demonstrated that longer reasoning budgets improve overall question-answering performance in selective QA contexts—though their analysis centered on token-level confidence and just math questions. In contrast, our upcoming experiments will focus on how extended reasoning affects verbalized confidence. We want to see if producing more detailed or iterative reasoning steps (e.g., using Deepseek R1’s think-before-you-answer finetuning) with a forced budget ([Muennighoff et al. 2025]) makes the model overconfident, more consistent, or potentially better calibrated than simpler baselines. A key question is whether domain-specific differences persist when the model expend more computational effort on each answer.
+In earlier work, [Jurayj et al. 2025] showed that extended reasoning budgets can improve overall question-answering performance in selective QA contexts - though that study primarily used token-level confidence for mathematical questions. Here, our focus is on how additional reasoning specifically influences verbalized confidence. We want to find out whether producing more detailed or iterative answers (e.g., using Deepseek R1’s think-before-you-answer finetuning) with a forced budget ([Muennighoff et al. 2025]) makes the model overconfident, more consistent, or better calibrated than simpler approaches. Another question is whether domain-specific differences remain with larger test-time-compute budget.
 
----
+We use our "SampleQA" dataset - 202 QA items drawn from TriviaQA, SimpleQA, GSM8k, AIME, and MMLU, and analyze how stated, verbalized confidence change with different numbers of reasoning tokens.
 
-## ⚙️🛠️🚧 Test-Time Compute Budget vs UQ Estimates (Planned for April 2025)
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/sampleqa_reasoning.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 5.</strong> <em>Effectiveness and Confidence on our SampleQA dataset across different reasoning budgets.</em>
+  </figcaption>
+</figure>
 
-Techniques like semantic entropy require multiple forward passes and thus demand higher test-time compute budgets. In this experiment, we plan to equalize test-time budgets across methods to investigate whether a single, carefully reasoned verbalized estimate can rival generation frequency strategies. Specifically, we’ll compare verbalized confidence and semantic probabilities, under identical compute constraints forced by method suggested by [Muennighoff et al. 2025].
+From these preliminary results, stated confidence for incorrect answers tends to decrease with increased reasoning, leading to a notable improvement in how well the stated confidence correlates with actual correctness. Over time, this improvement approaches roughly the same effectiveness level as Semantic Entropy, the multi-sample approach discussed earlier.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/sampleqa_reasoning_fact.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 6.</strong> <em>Effectiveness and Confidence on our SampleQA dataset across different reasoning budgets for Fact-Retrieval tasks.</em>
+  </figcaption>
+</figure>
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/sampleqa_reasoning_math.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 7.</strong> <em>Effectiveness and Confidence on our SampleQA dataset across different reasoning budgets for Mathematical Reasoning tasks.</em>
+  </figcaption>
+</figure>
+
+We see that extended reasoning does not always produce large accuracy gains, particularly for fact-retrieval tasks that rely on recalling a single fact rather than deriving one. Nevertheless, **in simple fact-retrieval tasks higher reasoning budget still produces more accurate self-reported confidence**. In mathematical reasoning, both accuracy and calibration improve more substantially, indicating that more complex tasks benefit from longer reasoning in multiple ways.
+
+These observations support our **idea that the model has no built-in sense of verbalized confidence and must instead discover uncertainty by exploring its answer space**. This exploration can be done in two main ways:
+
+1. By sampling multiple responses (e.g., 10 or 100 times) and aggregating statistics (such as Semantic Entropy),
+2. By engaging in more reasoning time, so that when the model finally commits to an answer, it has examined a wider range of possibilities. We hypothesize that in this scenario, **the final verbalized confidence is just a self-reported "statistic" describing the sampled tokens in the reasoning trace**.
+
+To further strengthen our hypothesis and the findings above, we propose additional small-scale experiments described in the next section.
+
+## Ablation studies and reasoning trace analysis (April 2025)
+
+All of the experiments above are done on a SampleQA dataset with reasoning traces of length 1300 for the first two experiments, and no reasoning for the last one.
+
+### Verbalized Score as a Statistic of In-Reasoning Entropy
+
+In this experiment, we count the distinct entities and the frequency of their mentions within the reasoning trace, then compute an entropy measure. Next, we calculate the Spearman correlation between this entropy value and the final verbalized score. If the correlation is high, it suggests that the **verbalized score can be viewed as a statistic capturing the amount of variation within the reasoning process**.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/verbalized_variance.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 8.</strong> <em>Alignment of in-reasoning entropy and final verbalized score.</em>
+  </figcaption>
+</figure>
+
+We see a moderate-strong correlation between two numbers, suggesting that there is some kind of connection between the two.
+
+### Modifying the Reasoning Trace to Include More Options
+
+Here, we take an existing pair (reasoning, final answer) and use a different LLM to produce a modified reasoning that explicitly explores additional possibilities (e.g., “Option A, maybe B, or perhaps C”). We then ask Deepseek R1 to generate a new final answer as though this updated, more uncertain reasoning were its own. If the final confidence changes substantially, it supports the idea that the **verbalized score is largely determined by how many alternative pathways the reasoning has considered**.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/verbalized_altered_reasoning.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 9.</strong> <em>Verbalized score change after altering the reasoning trace.</em>
+  </figcaption>
+</figure>
+
+We see a very significant drop in the model confidence, it is a strong indicator that the verbalized score does not depend on the model intrinsic uncertainty, but rather on the generation space explored in the reasoning process.
+
+### Prompting the Model That a Question Is Difficult
+
+We know the verbalized score can be influenced by prompt framing. For questions the model has already answered correctly in standard conditions, we add a note in the system prompt implying the question is hard, then observe how the final verbalized score shifts. If this change is large, it may indicate the model’s reported confidence stems more from a meta-level perception of difficulty than the actual reasoning steps. If the shift is smaller compared to the previous experiment, it suggests the **verbalized score is more a reflection of the internally sampled possibilities rather than an uninformed sense of difficulty**.
+
+<figure style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 4em; margin-bottom: 20px;">
+  <img src="/assets/images/verbalized_difficult.png" alt="Sample QA Reasoning" style="max-width: 90%; margin: 0 10px;">
+  <figcaption style="width: 100%; text-align: center; margin-top: 10px;">
+    <strong>Figure 10.</strong> <em>Verbalized score change after telling the model that the question is difficult.</em>
+  </figcaption>
+</figure>
+
+We see a lower drop in the model confidence than in the previous experiment. It is still significant statistically suggesting that the prompt framing is important, but the internal space explored by the model in the reasoning process is far more impactful.
 
 ---
 
@@ -186,6 +257,7 @@ Techniques like semantic entropy require multiple forward passes and thus demand
 
 - 19.03.2025: Added introduction, motivation, descriptions of existing methods and research questions
 - 24.03.2025: Fixed the references links, backfilled experiments from Feb and early March, added planned experiments
+- 08.04.2025: Added section about longer reasoning vs verbalized score effectiveness. Added 3 smaller experiments.
 
 [Dubey et al. 2024]: https://arxiv.org/abs/2407.21783
 [Huang et al. 2023]: https://arxiv.org/abs/2311.05232
