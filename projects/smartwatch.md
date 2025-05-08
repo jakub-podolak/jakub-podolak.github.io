@@ -163,6 +163,6 @@ Like SKL4, this watch was intended to incorporate many new technologies, with am
 
 ---
 
-### 202?: SKL7, The Future
+## 202?: SKL7, The Future
 
 I’ve noticed that every odd version is a success (reliable solutions, good design) and every even version is a failure (too many features, new technologies). Following this trend, SKL7 has to be a success 😁. With more up-to-date components, I hope to combine SKL5’s robustness with SKL6’s dream of new features. My design taste has also evolved, so it might be less cyberpunk-y. We’ll see what the future brings!
