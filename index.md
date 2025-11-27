@@ -3,15 +3,15 @@ title: Home
 layout: home
 ---
 
-# ✨ You've discovered my secret hideout! ✨
+# JP Zone
 
 Hey there! It seems like everyone in Machine Learning has a cool website showcasing their projects - so here’s mine, partly to fit in, and partly because I seriously need some motivation to document what I'm actually doing 😅
 
-## 😄 About Me
+## About Me
 
-I earned my Bachelor's degree in Computer Science from the University of Warsaw and graduated with honors from the Master's program in Artificial Intelligence at the University of Amsterdam. I have industry experience as a Machine Learning Engineer and Data Scientist - check out my [LinkedIn] if you want to know more.
+I graduated from the Master's program in Artificial Intelligence at the University of Amsterdam and earned my Bachelor's degree in Computer Science from the University of Warsaw. I have industry experience as a Machine Learning Engineer and Data Scientist - check out my [LinkedIn] if you want to know more.
 
-## 🔬 Research and Publications
+## Research and Publications
 
 - [LLM generated responses to mitigate the impact of hate speech], **EMNLP Findings 2024, first author**
 
@@ -19,11 +19,11 @@ I earned my Bachelor's degree in Computer Science from the University of Warsaw 
 
 - [Gandalf the Red: Adaptive Security for LLMs], **ICML 2025** (as part of the work in Lakera AI)
 
-- [Read Your Own Mind: Reasoning Helps Surface Self-Confidence Signals in LLMs], preprint, part of my MSc thesis.
+- [Read Your Own Mind: Reasoning Helps Surface Self-Confidence Signals in LLMs], **UncertaiNLP Workshop @ EMNLP 2025, first author**
 
 You can find my Master's thesis [here (PDF)](/assets/pdfs/masters_thesis.pdf).
 
-## 🧑‍🎨 Projects and Blogposts
+## Projects and Blogposts
 
 - ⌚ [Trying to build a DIY Smartwatch], 2018 - ?, Also known as the perfect excuse to buy a 3D printer and learn PCB design. Check out the progress through five (and counting!) iterations of the watch.
 

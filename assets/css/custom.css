@@ -1,0 +1,328 @@
+/* Custom font styling - Very Bold Helvetica */
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+/* ============================================
+   HIDE ANCHOR LINKS (navigation links next to headlines)
+   ============================================ */
+
+/* Hide anchor links that appear next to headlines */
+.anchor,
+a.anchor,
+.anchor-heading,
+.heading-anchor,
+.anchorjs-link {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Also hide any anchor links within headings */
+h1 .anchor,
+h1 a.anchor,
+h2 .anchor,
+h2 a.anchor,
+h3 .anchor,
+h3 a.anchor,
+h4 .anchor,
+h4 a.anchor,
+h5 .anchor,
+h5 a.anchor,
+h6 .anchor,
+h6 a.anchor {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ============================================
+   HEADLINES - Control size and color here
+   ============================================ */
+
+/* H1 - Main headlines (largest) */
+h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 2.5em !important;        /* Adjust size: try 2em, 2.5em, 3em, etc. */
+    color: #000000 !important;          /* Change color: #000000 = black, #333333 = dark gray, #0066cc = blue, etc. */
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* H2 - Section headlines */
+h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 2em !important;          /* Adjust size */
+    color: #000000 !important;           /* Change color */
+    margin-top: 0.75em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* H3 - Subsection headlines */
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.5em !important;        /* Adjust size */
+    color: #000000 !important;           /* Change color */
+    margin-top: 0.75em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* H4 - Smaller headlines */
+h4 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.25em !important;       /* Adjust size */
+    color: #000000 !important;          /* Change color */
+    margin-top: 0.75em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* H5 and H6 - Smallest headlines */
+h5 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1em !important;        /* Adjust size */
+    color: #000000 !important;           /* Change color */
+}
+
+h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Adjust size */
+    color: #000000 !important;           /* Change color */
+}
+
+/* ============================================
+   NORMAL TEXT - Paragraphs and body text
+   ============================================ */
+
+/* Normal paragraph text */
+p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Adjust size: 0.9em = smaller, 1.1em = larger, 1.2em = even larger */
+    color: #000000 !important;          /* Change color */
+    line-height: 1.6 !important;        /* Adjust line spacing: 1.4 = tighter, 1.8 = looser */
+    margin-bottom: 1em !important;
+}
+
+/* Body text */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Base font size */
+    color: #000000 !important;          /* Base text color */
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+
+/* Regular links - White text on black background, no underline */
+a {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;          /* White text */
+    background-color: #000000 !important; /* Black background */
+    text-decoration: none !important;    /* No underline */
+    padding: 0.1em 0.3em !important;     /* Small padding for better appearance */
+    border-radius: 2px !important;       /* Slightly rounded corners */
+}
+
+/* Links on hover - Optional: you can change hover style */
+a:hover {
+    color: #ffffff !important;           /* Keep white text */
+    background-color: #333333 !important; /* Slightly lighter black on hover */
+    text-decoration: none !important;    /* No underline on hover */
+}
+
+/* Visited links - Keep same style or customize */
+a:visited {
+    color: #ffffff !important;           /* White text */
+    background-color: #000000 !important; /* Black background */
+    text-decoration: none !important;    /* No underline */
+}
+
+/* ============================================
+   LISTS
+   ============================================ */
+
+/* Unordered lists (bullet points) */
+ul {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Adjust size */
+    color: #000000 !important;          /* Change color */
+    margin-left: 1.5em !important;
+    margin-bottom: 1em !important;
+}
+
+/* Ordered lists (numbered) */
+ol {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Adjust size */
+    color: #000000 !important;          /* Change color */
+    margin-left: 1.5em !important;
+    margin-bottom: 1em !important;
+}
+
+/* List items */
+li {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;          /* Adjust size */
+    color: #000000 !important;          /* Change color */
+    margin-bottom: 0.5em !important;
+}
+
+/* ============================================
+   BOLD AND ITALIC TEXT
+   ============================================ */
+
+/* Bold text (markdown: **text** or __text__) */
+strong, b {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    color: #000000 !important;          /* Change color */
+}
+
+/* Italic text (markdown: *text* or _text_) */
+em, i {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    color: #000000 !important;          /* Change color */
+}
+
+/* ============================================
+   CODE BLOCKS AND INLINE CODE
+   ============================================ */
+
+/* Inline code (markdown: `code`) */
+code {
+    font-family: "Courier New", Courier, monospace !important;
+    font-weight: 700 !important;
+    font-size: 0.9em !important;        /* Adjust size */
+    color: #cc0000 !important;          /* Change color: #cc0000 = red, #006600 = green */
+    background-color: #f5f5f5 !important; /* Background color */
+    padding: 0.2em 0.4em !important;
+    border-radius: 3px !important;
+}
+
+/* Code blocks (markdown: ```code```) */
+pre {
+    font-family: "Courier New", Courier, monospace !important;
+    font-weight: 700 !important;
+    font-size: 0.9em !important;        /* Adjust size */
+    color: #000000 !important;           /* Change color */
+    background-color: #f5f5f5 !important; /* Background color */
+    padding: 1em !important;
+    border-radius: 5px !important;
+    overflow-x: auto !important;
+}
+
+pre code {
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+/* ============================================
+   BLOCKQUOTES
+   ============================================ */
+
+/* Blockquotes (markdown: > text) */
+blockquote {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;         /* Adjust size */
+    color: #666666 !important;          /* Change color: #666666 = gray, #0066cc = blue */
+    border-left: 4px solid #cccccc !important; /* Left border color */
+    padding-left: 1em !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-style: italic !important;
+}
+
+/* ============================================
+   OTHER ELEMENTS
+   ============================================ */
+
+/* Horizontal rules (markdown: ---) */
+hr {
+    border: none !important;
+    border-top: 2px solid #cccccc !important; /* Line color */
+    margin: 2em 0 !important;
+}
+
+/* Tables */
+table {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1em !important;         /* Adjust size */
+    color: #000000 !important;          /* Change color */
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin-bottom: 1em !important;
+}
+
+th {
+    font-weight: 700 !important;
+    color: #000000 !important;          /* Header text color */
+    background-color: #f0f0f0 !important; /* Header background */
+    padding: 0.5em !important;
+    border: 1px solid #cccccc !important;
+}
+
+td {
+    padding: 0.5em !important;
+    border: 1px solid #cccccc !important;
+}
+
+/* ============================================
+   NAVIGATION SIDEBAR - Active item styling
+   ============================================ */
+
+/* Active navigation item - Red background instead of gradient */
+.side-bar .nav-list .nav-list-item.active,
+.side-bar .nav-list .nav-list-item.active > a,
+.nav-list .nav-list-item.active,
+.nav-list .nav-list-item.active > a {
+    background: #ff0000 !important;        /* Red background */
+    background-color: #ff0000 !important;  /* Red background (fallback) */
+    background-image: none !important;     /* Remove gradient */
+    color: #ffffff !important;             /* White text for contrast */
+}
+
+/* Active navigation item hover state */
+.side-bar .nav-list .nav-list-item.active:hover,
+.side-bar .nav-list .nav-list-item.active > a:hover,
+.nav-list .nav-list-item.active:hover,
+.nav-list .nav-list-item.active > a:hover {
+    background: #cc0000 !important;        /* Darker red on hover */
+    background-color: #cc0000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* Also target any gradient-related properties */
+.side-bar .nav-list .nav-list-item.active,
+.nav-list .nav-list-item.active {
+    background: linear-gradient(to right, #ff0000, #ff0000) !important; /* Solid red */
+    background-color: #ff0000 !important;
+}
+
+/* Ensure the active indicator bar is also red */
+.side-bar .nav-list .nav-list-item.active::before,
+.nav-list .nav-list-item.active::before {
+    background-color: #ff0000 !important;
+    background: #ff0000 !important;
+}
+
