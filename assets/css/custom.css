@@ -1,11 +1,11 @@
-/* Custom font styling - Very Bold Helvetica */
+/* Custom font styling - GT America Mono for non-headers */
 * {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
 }
 
@@ -105,7 +105,7 @@ h6 {
 
 /* Normal paragraph text */
 p {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;          /* Adjust size: 0.9em = smaller, 1.1em = larger, 1.2em = even larger */
     color: #000000 !important;          /* Change color */
@@ -127,7 +127,7 @@ body {
 
 /* Regular links - White text on black background, no underline */
 a {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     color: #ffffff !important;          /* White text */
     background-color: #000000 !important; /* Black background */
@@ -150,13 +150,31 @@ a:visited {
     text-decoration: none !important;    /* No underline */
 }
 
+/* Site title (top-left name) - non-clickable, black box */
+.site-title {
+    pointer-events: none !important;      /* Disable clicks */
+    cursor: default !important;           /* Default cursor */
+    text-decoration: none !important;     /* No underline */
+    background-color: #000000 !important; /* Solid black background */
+    color: #ffffff !important;            /* White text */
+    padding: 0.4rem 0.8rem !important;    /* Some breathing room */
+    display: inline-block !important;
+}
+
+/* Ensure the header area behind the title is also solid black (no gradient) */
+.site-header,
+.side-bar .site-header {
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+
 /* ============================================
    LISTS
    ============================================ */
 
 /* Unordered lists (bullet points) */
 ul {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;          /* Adjust size */
     color: #000000 !important;          /* Change color */
@@ -166,7 +184,7 @@ ul {
 
 /* Ordered lists (numbered) */
 ol {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;          /* Adjust size */
     color: #000000 !important;          /* Change color */
@@ -176,7 +194,7 @@ ol {
 
 /* List items */
 li {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;          /* Adjust size */
     color: #000000 !important;          /* Change color */
@@ -189,14 +207,14 @@ li {
 
 /* Bold text (markdown: **text** or __text__) */
 strong, b {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     color: #000000 !important;          /* Change color */
 }
 
 /* Italic text (markdown: *text* or _text_) */
 em, i {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-style: italic !important;
     color: #000000 !important;          /* Change color */
@@ -211,7 +229,7 @@ code {
     font-family: "Courier New", Courier, monospace !important;
     font-weight: 700 !important;
     font-size: 0.9em !important;        /* Adjust size */
-    color: #cc0000 !important;          /* Change color: #cc0000 = red, #006600 = green */
+    color: #cccc00 !important;          /* Change color: #cccc00 = yellow, #006600 = green */
     background-color: #f5f5f5 !important; /* Background color */
     padding: 0.2em 0.4em !important;
     border-radius: 3px !important;
@@ -240,7 +258,7 @@ pre code {
 
 /* Blockquotes (markdown: > text) */
 blockquote {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;         /* Adjust size */
     color: #666666 !important;          /* Change color: #666666 = gray, #0066cc = blue */
@@ -264,7 +282,7 @@ hr {
 
 /* Tables */
 table {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
     font-weight: 700 !important;
     font-size: 1em !important;         /* Adjust size */
     color: #000000 !important;          /* Change color */
@@ -290,15 +308,15 @@ td {
    NAVIGATION SIDEBAR - Active item styling
    ============================================ */
 
-/* Active navigation item - Red background instead of gradient */
+/* Active navigation item - Yellow background instead of gradient */
 .side-bar .nav-list .nav-list-item.active,
 .side-bar .nav-list .nav-list-item.active > a,
 .nav-list .nav-list-item.active,
 .nav-list .nav-list-item.active > a {
-    background: #ff0000 !important;        /* Red background */
-    background-color: #ff0000 !important;  /* Red background (fallback) */
+    background: #ffff00 !important;        /* Yellow background */
+    background-color: #ffff00 !important;  /* Yellow background (fallback) */
     background-image: none !important;     /* Remove gradient */
-    color: #ffffff !important;             /* White text for contrast */
+    color: #000000 !important;             /* Black text for contrast */
 }
 
 /* Active navigation item hover state */
@@ -306,23 +324,58 @@ td {
 .side-bar .nav-list .nav-list-item.active > a:hover,
 .nav-list .nav-list-item.active:hover,
 .nav-list .nav-list-item.active > a:hover {
-    background: #cc0000 !important;        /* Darker red on hover */
-    background-color: #cc0000 !important;
+    background: #cccc00 !important;        /* Darker yellow on hover */
+    background-color: #cccc00 !important;
     background-image: none !important;
     color: #ffffff !important;
-}
-
-/* Also target any gradient-related properties */
+}/* Also target any gradient-related properties */
 .side-bar .nav-list .nav-list-item.active,
 .nav-list .nav-list-item.active {
-    background: linear-gradient(to right, #ff0000, #ff0000) !important; /* Solid red */
-    background-color: #ff0000 !important;
-}
-
-/* Ensure the active indicator bar is also red */
+    background: linear-gradient(to right, #ffff00, #ffff00) !important; /* Solid yellow */
+    background-color: #ffff00 !important;
+}/* Ensure the active indicator bar is also yellow */
 .side-bar .nav-list .nav-list-item.active::before,
 .nav-list .nav-list-item.active::before {
-    background-color: #ff0000 !important;
-    background: #ff0000 !important;
+    background-color: #ffff00 !important;
+    background: #ffff00 !important;
 }
 
+/* ============================================
+   NAV LIST ITEMS - Hover behavior
+   Make text yellow on hover, remove gradient
+   ============================================ */
+
+/* Base state for nav list links inside the sidebar */
+.side-bar .nav-list .nav-list-item .nav-list-link {
+    background-color: #000000 !important;   /* Solid black background */
+    background-image: none !important;      /* No gradient */
+    color: #ffffff !important;              /* White text by default */
+}
+
+/* Hover / focus state for nav list links */
+.side-bar .nav-list .nav-list-item .nav-list-link:hover,
+.side-bar .nav-list .nav-list-item .nav-list-link:focus {
+    background-color: #000000 !important;   /* Keep solid black background */
+    background-image: none !important;      /* Ensure gradient is removed */
+    color: #ffff00 !important;              /* Yellow text on hover */
+}
+
+/* ============================================
+   HOME NAV BUTTON - Make text black
+   ============================================ */
+
+/* Default state for Home nav link */
+.nav-list .nav-list-item > a[href="/"] {
+    color: #000000 !important;
+    background-color: transparent !important;
+}
+
+/* Active state for Home nav link */
+.nav-list .nav-list-item.active > a[href="/"] {
+    color: #000000 !important;
+}
+
+/* Hover state for active Home nav link */
+.nav-list .nav-list-item.active > a[href="/"]:hover {
+    color: #000000 !important;
+}
