@@ -1,381 +1,445 @@
-/* Custom font styling - GT America Mono for non-headers */
-* {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
+/* ============================================
+   Y2K THEME
+   White page; only the 3D shards and accents carry the theme tint.
+   The theme is picked from the current section (see head_custom.html)
+   and swapped while hovering a top-level menu item (see assets/js/y2k.js).
+   --tint-rgb is an "r, g, b" triple of --tint so it can be used with any alpha.
+   ============================================ */
+
+:root,
+:root[data-theme="mint"] {
+    --tint: #4fae93;
+    --tint-rgb: 79, 174, 147;
+    --ink: #1c463b;
 }
 
+:root[data-theme="purple"] {
+    --tint: #7a4fe0;
+    --tint-rgb: 122, 79, 224;
+    --ink: #2a1763;
+}
+
+:root[data-theme="pink"] {
+    --tint: #e0609b;
+    --tint-rgb: 224, 96, 155;
+    --ink: #6b1f48;
+}
+
+:root {
+    --font-display: "Google Sans Flex", "Helvetica Neue", Arial, sans-serif;
+    /* Google Sans Flex is variable: weight 1-1000, width 25%-151% */
+    --display-weight: 200;
+    --display-stretch: 151%;
+    --font-mono: "Space Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --ease: 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    --panel: rgba(255, 255, 255, 0.35);
+    --panel-border: rgba(var(--tint-rgb), 0.45);
+}
+
+/* ============================================
+   PAGE + BACKGROUND
+   ============================================ */
+
+html {
+    background-color: #ffffff;
+}
+
+/* Transparent so the fixed .y2k-bg layer (z-index: -1) shows through */
 body {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    color: var(--ink);
+    transition: color var(--ease);
+}
+
+.y2k-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: #ffffff;
+}
+
+/* Grid that drifts slowly diagonally */
+.y2k-grid {
+    position: absolute;
+    inset: -160px;
+    background-image:
+        linear-gradient(rgba(var(--tint-rgb), 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--tint-rgb), 0.12) 1px, transparent 1px);
+    background-size: 160px 160px;
+    animation: y2k-grid-drift 40s linear infinite;
+}
+
+@keyframes y2k-grid-drift {
+    to { transform: translate(160px, 160px); }
+}
+
+/* Big soft rounded shapes floating behind everything */
+.y2k-blob {
+    position: absolute;
+    border-radius: 80px;
+    background: rgba(var(--tint-rgb), 0.06);
+    transition: background-color var(--ease);
+    animation: y2k-float 60s ease-in-out infinite alternate;
+}
+
+.y2k-blob--1 { width: 520px; height: 760px; left: -140px; top: 20%; transform: rotate(35deg); }
+.y2k-blob--2 { width: 380px; height: 380px; left: 30%; top: -120px; transform: rotate(-20deg); animation-duration: 75s; }
+.y2k-blob--3 { width: 460px; height: 300px; left: 18%; bottom: -120px; transform: rotate(15deg); animation-duration: 90s; }
+
+@keyframes y2k-float {
+    50% { translate: 40px -30px; rotate: 6deg; }
+    to { translate: -30px 20px; rotate: -4deg; }
+}
+
+.y2k-arm {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .y2k-grid,
+    .y2k-blob { animation: none; }
 }
 
 /* ============================================
    HIDE ANCHOR LINKS (navigation links next to headlines)
    ============================================ */
 
-/* Hide anchor links that appear next to headlines */
-.anchor,
-a.anchor,
 .anchor-heading,
-.heading-anchor,
 .anchorjs-link {
     display: none !important;
-    visibility: hidden !important;
-}
-
-/* Also hide any anchor links within headings */
-h1 .anchor,
-h1 a.anchor,
-h2 .anchor,
-h2 a.anchor,
-h3 .anchor,
-h3 a.anchor,
-h4 .anchor,
-h4 a.anchor,
-h5 .anchor,
-h5 a.anchor,
-h6 .anchor,
-h6 a.anchor {
-    display: none !important;
-    visibility: hidden !important;
 }
 
 /* ============================================
-   HEADLINES - Control size and color here
+   SIDEBAR
    ============================================ */
 
-/* H1 - Main headlines (largest) */
-h1 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 2.5em !important;        /* Adjust size: try 2em, 2.5em, 3em, etc. */
-    color: #000000 !important;          /* Change color: #000000 = black, #333333 = dark gray, #0066cc = blue, etc. */
-    margin-top: 0.5em !important;
-    margin-bottom: 0.5em !important;
+.side-bar {
+    background: transparent;
+    border-right: 0;
 }
 
-/* H2 - Section headlines */
-h2 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 2em !important;          /* Adjust size */
-    color: #000000 !important;           /* Change color */
-    margin-top: 0.75em !important;
-    margin-bottom: 0.5em !important;
+.site-header {
+    background: transparent;
+    border-bottom: 0;
 }
 
-/* H3 - Subsection headlines */
-h3 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1.5em !important;        /* Adjust size */
-    color: #000000 !important;           /* Change color */
-    margin-top: 0.75em !important;
-    margin-bottom: 0.5em !important;
-}
-
-/* H4 - Smaller headlines */
-h4 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1.25em !important;       /* Adjust size */
-    color: #000000 !important;          /* Change color */
-    margin-top: 0.75em !important;
-    margin-bottom: 0.5em !important;
-}
-
-/* H5 and H6 - Smallest headlines */
-h5 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1.1em !important;        /* Adjust size */
-    color: #000000 !important;           /* Change color */
-}
-
-h6 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Adjust size */
-    color: #000000 !important;           /* Change color */
-}
-
-/* ============================================
-   NORMAL TEXT - Paragraphs and body text
-   ============================================ */
-
-/* Normal paragraph text */
-p {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Adjust size: 0.9em = smaller, 1.1em = larger, 1.2em = even larger */
-    color: #000000 !important;          /* Change color */
-    line-height: 1.6 !important;        /* Adjust line spacing: 1.4 = tighter, 1.8 = looser */
-    margin-bottom: 1em !important;
-}
-
-/* Body text */
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Base font size */
-    color: #000000 !important;          /* Base text color */
-}
-
-/* ============================================
-   LINKS
-   ============================================ */
-
-/* Regular links - White text on black background, no underline */
-a {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;          /* White text */
-    background-color: #000000 !important; /* Black background */
-    text-decoration: none !important;    /* No underline */
-    padding: 0.1em 0.3em !important;     /* Small padding for better appearance */
-    border-radius: 2px !important;       /* Slightly rounded corners */
-}
-
-/* Links on hover - Optional: you can change hover style */
-a:hover {
-    color: #ffffff !important;           /* Keep white text */
-    background-color: #333333 !important; /* Slightly lighter black on hover */
-    text-decoration: none !important;    /* No underline on hover */
-}
-
-/* Visited links - Keep same style or customize */
-a:visited {
-    color: #ffffff !important;           /* White text */
-    background-color: #000000 !important; /* Black background */
-    text-decoration: none !important;    /* No underline */
-}
-
-/* Site title (top-left name) - non-clickable, black box */
+/* Site title (top-left name) - non-clickable panel */
 .site-title {
-    pointer-events: none !important;      /* Disable clicks */
-    cursor: default !important;           /* Default cursor */
-    text-decoration: none !important;     /* No underline */
-    background-color: #000000 !important; /* Solid black background */
-    color: #ffffff !important;            /* White text */
-    padding: 0.4rem 0.8rem !important;    /* Some breathing room */
-    display: inline-block !important;
+    position: relative;
+    pointer-events: none;
+    cursor: default;
+    margin: 1rem 0.75rem 0.5rem;
+    padding: 0.8rem 1rem;
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-stretch: var(--display-stretch);
+    font-size: 1.05rem !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    transition: color var(--ease), border-color var(--ease);
 }
 
-/* Ensure the header area behind the title is also solid black (no gradient) */
-.site-header,
-.side-bar .site-header {
-    background-color: #000000 !important;
-    background-image: none !important;
+.site-button,
+.site-button:hover {
+    color: var(--ink);
+    background: transparent;
+}
+
+.site-nav {
+    padding-top: 1rem;
+}
+
+/* Top-level menu items - wide caps with a tinted bar on the left */
+.site-nav > .nav-list > .nav-list-item {
+    margin-bottom: 0.6rem;
+}
+
+.site-nav > .nav-list > .nav-list-item > .nav-list-link {
+    position: relative;
+    margin: 0 0.75rem;
+    padding-left: 1.1rem;
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-stretch: var(--display-stretch);
+    font-size: 0.85rem !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: var(--ink);
+    background: var(--panel);
+    border-left: 2px solid var(--tint);
+    transition: background-color 0.2s ease, color var(--ease), border-color var(--ease), border-left-width 0.2s ease, padding-left 0.2s ease;
+}
+
+.side-bar .site-nav > .nav-list > .nav-list-item > .nav-list-link:hover,
+.side-bar .site-nav > .nav-list > .nav-list-item > .nav-list-link:focus,
+.side-bar .site-nav > .nav-list > .nav-list-item > .nav-list-link.active {
+    color: var(--ink);
+    background-image: none;
+    background-color: rgba(var(--tint-rgb), 0.18);
+    border-left-width: 10px;
+    padding-left: calc(1.1rem - 8px);
+}
+
+/* Nested menu items (individual posts) */
+.site-nav .nav-list .nav-list .nav-list-link {
+    margin: 0 0.75rem 0 1.5rem;
+    font-size: 0.75rem !important;
+    line-height: 1.4;
+    border-left: 1px dashed rgba(var(--tint-rgb), 0.6);
+}
+
+.side-bar .site-nav .nav-list .nav-list-item .nav-list .nav-list-item .nav-list-link,
+.side-bar .site-nav .nav-list .nav-list-item .nav-list-expander {
+    color: var(--ink);
+}
+
+.side-bar .site-nav .nav-list .nav-list-item .nav-list .nav-list-item .nav-list-link:hover,
+.side-bar .site-nav .nav-list .nav-list-item .nav-list .nav-list-item .nav-list-link.active {
+    color: #ffffff;
+    background-image: none;
+    background-color: var(--tint);
+}
+
+.side-bar .nav-list-expander:hover {
+    background-image: none;
+    background-color: transparent;
 }
 
 /* ============================================
-   LISTS
+   HEADER BAR - search is disabled, so collapse it
    ============================================ */
 
-/* Unordered lists (bullet points) */
-ul {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Adjust size */
-    color: #000000 !important;          /* Change color */
-    margin-left: 1.5em !important;
-    margin-bottom: 1em !important;
+.main {
+    background: transparent;
 }
 
-/* Ordered lists (numbered) */
-ol {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Adjust size */
-    color: #000000 !important;          /* Change color */
-    margin-left: 1.5em !important;
-    margin-bottom: 1em !important;
-}
-
-/* List items */
-li {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;          /* Adjust size */
-    color: #000000 !important;          /* Change color */
-    margin-bottom: 0.5em !important;
+.main-header,
+.side-bar + .main .main-header {
+    height: 1rem;
+    background-color: transparent;
+    border-bottom: 0;
 }
 
 /* ============================================
-   BOLD AND ITALIC TEXT
+   CONTENT PANEL
    ============================================ */
 
-/* Bold text (markdown: **text** or __text__) */
-strong, b {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    color: #000000 !important;          /* Change color */
+.main-content-wrap {
+    margin: 0.5rem 1rem 3rem;
+    padding: 1.5rem 1.5rem 2rem;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    transition: border-color var(--ease);
 }
 
-/* Italic text (markdown: *text* or _text_) */
-em, i {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-style: italic !important;
-    color: #000000 !important;          /* Change color */
+@media (min-width: 50rem) {
+    .main-content-wrap {
+        margin: 0.5rem 2rem 4rem 1rem;
+        padding: 2rem 2.5rem 2.5rem;
+    }
+}
+
+.main-content {
+    color: var(--ink);
+    line-height: 1.65;
+}
+
+.breadcrumb-nav-list-item,
+.breadcrumb-nav-list-item a {
+    color: var(--ink);
 }
 
 /* ============================================
-   CODE BLOCKS AND INLINE CODE
+   HEADLINES
    ============================================ */
 
-/* Inline code (markdown: `code`) */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-stretch: var(--display-stretch);
+    color: var(--ink);
+    letter-spacing: 0.03em;
+    margin-top: 1.4em;
+    margin-bottom: 0.6em;
+    transition: color var(--ease);
+}
+
+/* H1 - highlighted title, like a selected label */
+.main-content h1 {
+    display: inline;
+    padding: 0.05em 0.3em;
+    font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+    line-height: 1.6;
+    color: #ffffff;
+    background: var(--tint);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: background-color var(--ease);
+}
+
+.main-content h1:first-child,
+.main-content h2:first-child {
+    margin-top: 0;
+}
+
+/* Dotted divider under the title */
+.main-content h1 + * {
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 2px dotted rgba(var(--tint-rgb), 0.7);
+}
+
+.main-content h2 {
+    font-size: 1.35rem !important;
+    text-transform: uppercase;
+    padding-left: 0.7rem;
+    border-left: 4px solid var(--tint);
+}
+
+.main-content h3 { font-size: 1.1rem !important; }
+.main-content h4 { font-size: 1rem !important; }
+.main-content h5,
+.main-content h6 { font-size: 0.9rem !important; }
+
+/* ============================================
+   TEXT, LISTS, LINKS
+   ============================================ */
+
+.main-content p,
+.main-content li {
+    font-size: 0.95rem !important;
+    color: var(--ink);
+}
+
+.main-content strong,
+.main-content b {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.main-content li {
+    margin-bottom: 0.6em;
+}
+
+.main-content ul > li::before {
+    content: "▸";
+    color: var(--tint);
+}
+
+a,
+a:visited {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.main-content a,
+.main-content a:visited {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--tint);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main-content a:hover {
+    color: #ffffff;
+    background: var(--tint);
+    text-decoration: none;
+}
+
+/* ============================================
+   CODE, QUOTES, TABLES, OTHER
+   ============================================ */
+
 code {
-    font-family: "Courier New", Courier, monospace !important;
-    font-weight: 700 !important;
-    font-size: 0.9em !important;        /* Adjust size */
-    color: #cccc00 !important;          /* Change color: #cccc00 = yellow, #006600 = green */
-    background-color: #f5f5f5 !important; /* Background color */
-    padding: 0.2em 0.4em !important;
-    border-radius: 3px !important;
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    color: var(--ink);
+    background: rgba(var(--tint-rgb), 0.12);
+    border: 0;
+    padding: 0.15em 0.35em;
+    border-radius: 3px;
 }
 
-/* Code blocks (markdown: ```code```) */
-pre {
-    font-family: "Courier New", Courier, monospace !important;
-    font-weight: 700 !important;
-    font-size: 0.9em !important;        /* Adjust size */
-    color: #000000 !important;           /* Change color */
-    background-color: #f5f5f5 !important; /* Background color */
-    padding: 1em !important;
-    border-radius: 5px !important;
-    overflow-x: auto !important;
+pre,
+div.highlighter-rouge,
+div.listingblock > div.content,
+figure.highlight {
+    background: rgba(var(--tint-rgb), 0.08);
+    border-radius: 6px;
 }
 
 pre code {
-    background-color: transparent !important;
-    padding: 0 !important;
+    background: transparent;
+    padding: 0;
 }
 
-/* ============================================
-   BLOCKQUOTES
-   ============================================ */
-
-/* Blockquotes (markdown: > text) */
 blockquote {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;         /* Adjust size */
-    color: #666666 !important;          /* Change color: #666666 = gray, #0066cc = blue */
-    border-left: 4px solid #cccccc !important; /* Left border color */
-    padding-left: 1em !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    font-style: italic !important;
+    margin: 1.2em 0;
+    padding: 0.2em 0 0.2em 1em;
+    color: var(--ink);
+    border-left: 2px solid var(--tint);
 }
 
-/* ============================================
-   OTHER ELEMENTS
-   ============================================ */
-
-/* Horizontal rules (markdown: ---) */
 hr {
-    border: none !important;
-    border-top: 2px solid #cccccc !important; /* Line color */
-    margin: 2em 0 !important;
+    height: 0;
+    margin: 2em 0;
+    background: none;
+    border: 0;
+    border-top: 2px dotted rgba(var(--tint-rgb), 0.7);
 }
 
-/* Tables */
-table {
-    font-family: "GT America Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-    font-weight: 700 !important;
-    font-size: 1em !important;         /* Adjust size */
-    color: #000000 !important;          /* Change color */
-    border-collapse: collapse !important;
-    width: 100% !important;
-    margin-bottom: 1em !important;
+.table-wrapper {
+    box-shadow: none;
+    border: 1px solid var(--panel-border);
+}
+
+th,
+td {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.4);
+    border-bottom-color: rgba(var(--tint-rgb), 0.3);
 }
 
 th {
-    font-weight: 700 !important;
-    color: #000000 !important;          /* Header text color */
-    background-color: #f0f0f0 !important; /* Header background */
-    padding: 0.5em !important;
-    border: 1px solid #cccccc !important;
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    font-stretch: var(--display-stretch);
+    background: rgba(var(--tint-rgb), 0.12);
 }
 
-td {
-    padding: 0.5em !important;
-    border: 1px solid #cccccc !important;
+.main-content img {
+    border-radius: 6px;
+    border: 1px solid var(--panel-border);
 }
 
-/* ============================================
-   NAVIGATION SIDEBAR - Active item styling
-   ============================================ */
-
-/* Active navigation item - Yellow background instead of gradient */
-.side-bar .nav-list .nav-list-item.active,
-.side-bar .nav-list .nav-list-item.active > a,
-.nav-list .nav-list-item.active,
-.nav-list .nav-list-item.active > a {
-    background: #ffff00 !important;        /* Yellow background */
-    background-color: #ffff00 !important;  /* Yellow background (fallback) */
-    background-image: none !important;     /* Remove gradient */
-    color: #000000 !important;             /* Black text for contrast */
+.site-footer {
+    color: var(--ink);
 }
 
-/* Active navigation item hover state */
-.side-bar .nav-list .nav-list-item.active:hover,
-.side-bar .nav-list .nav-list-item.active > a:hover,
-.nav-list .nav-list-item.active:hover,
-.nav-list .nav-list-item.active > a:hover {
-    background: #cccc00 !important;        /* Darker yellow on hover */
-    background-color: #cccc00 !important;
-    background-image: none !important;
-    color: #ffffff !important;
-}/* Also target any gradient-related properties */
-.side-bar .nav-list .nav-list-item.active,
-.nav-list .nav-list-item.active {
-    background: linear-gradient(to right, #ffff00, #ffff00) !important; /* Solid yellow */
-    background-color: #ffff00 !important;
-}/* Ensure the active indicator bar is also yellow */
-.side-bar .nav-list .nav-list-item.active::before,
-.nav-list .nav-list-item.active::before {
-    background-color: #ffff00 !important;
-    background: #ffff00 !important;
-}
-
-/* ============================================
-   NAV LIST ITEMS - Hover behavior
-   Make text yellow on hover, remove gradient
-   ============================================ */
-
-/* Base state for nav list links inside the sidebar */
-.side-bar .nav-list .nav-list-item .nav-list-link {
-    background-color: #000000 !important;   /* Solid black background */
-    background-image: none !important;      /* No gradient */
-    color: #ffffff !important;              /* White text by default */
-}
-
-/* Hover / focus state for nav list links */
-.side-bar .nav-list .nav-list-item .nav-list-link:hover,
-.side-bar .nav-list .nav-list-item .nav-list-link:focus {
-    background-color: #000000 !important;   /* Keep solid black background */
-    background-image: none !important;      /* Ensure gradient is removed */
-    color: #ffff00 !important;              /* Yellow text on hover */
-}
-
-/* ============================================
-   HOME NAV BUTTON - Make text black
-   ============================================ */
-
-/* Default state for Home nav link */
-.nav-list .nav-list-item > a[href="/"] {
-    color: #000000 !important;
-    background-color: transparent !important;
-}
-
-/* Active state for Home nav link */
-.nav-list .nav-list-item.active > a[href="/"] {
-    color: #000000 !important;
-}
-
-/* Hover state for active Home nav link */
-.nav-list .nav-list-item.active > a[href="/"]:hover {
-    color: #000000 !important;
+::selection {
+    color: #ffffff;
+    background: var(--tint);
 }

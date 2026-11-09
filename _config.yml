@@ -7,3 +7,4 @@ url: https://jakubpodolak.space
 #   Template Repository: https://github.com/just-the-docs/just-the-docs-template
 favicon_ico: "/assets/images/favicon.ico"
 footer_content: ""
+search_enabled: false

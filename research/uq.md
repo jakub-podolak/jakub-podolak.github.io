@@ -6,11 +6,11 @@ parent: Research
 
 # When and Why Do Uncertainty Quantification Methods for LLMs Work?
 
-<div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
+<div style="background-color:rgba(var(--tint-rgb),0.12); border-left:4px solid var(--accent); border-radius:4px; padding:10px; margin-bottom:15px;">
 ⚠️ <strong>Note:</strong> As of 08.04.2025 this work is still in progress. Contents may change.
 </div>
 
-<div style="background-color:#ffdddd; border-left:4px solid #f44336; padding:10px; margin-bottom:15px;">
+<div style="background-color:rgba(var(--tint-rgb),0.12); border-left:4px solid var(--accent); border-radius:4px; padding:10px; margin-bottom:15px;">
 ⚠️ <strong>Note:</strong> This blogpost covers only a part of all the experiments and highlights just the top conclusions. A full paper will follow soon.
 </div>
 

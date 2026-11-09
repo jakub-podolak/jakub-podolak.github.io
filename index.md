@@ -3,8 +3,6 @@ title: Home
 layout: home
 ---
 
-# JP Zone
-
 Hey there! It seems like everyone in Machine Learning has a cool website showcasing their projects - so here’s mine, partly to fit in, and partly because I seriously need some motivation to document what I'm actually doing 😅
 
 ## About Me

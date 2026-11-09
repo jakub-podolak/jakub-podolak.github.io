@@ -1,2 +1,23 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wdth,wght@151,1..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
+<script>
+  /* Pick the color theme before first paint so there is no flash of the wrong color. */
+  window.y2kThemeFor = function (path) {
+    if (path.indexOf("/projects") === 0) return "purple";
+    if (path.indexOf("/research") === 0) return "pink";
+    return "mint";
+  };
+  document.documentElement.dataset.theme = window.y2kThemeFor(location.pathname);
+</script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+</script>
+<script type="module" src="{{ '/assets/js/y2k.js' | relative_url }}"></script>
