@@ -1,2 +1,5 @@
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
+{% unless site.background_3d == false or page.background_3d == false %}
+<script type="module" src="{{ '/assets/js/background3d.js' | relative_url }}"></script>
+{% endunless %}

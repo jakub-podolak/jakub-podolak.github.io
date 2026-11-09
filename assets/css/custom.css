@@ -379,3 +379,17 @@ td {
 .nav-list .nav-list-item.active > a[href="/"]:hover {
     color: #000000 !important;
 }
+
+
+/* ============================================
+   3D BACKGROUND (assets/js/background3d.js)
+   ============================================ */
+
+#bg3d {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;   /* never block clicks or text selection */
+}
