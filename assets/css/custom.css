@@ -310,6 +310,8 @@ body {
 }
 
 .main-content h2 {
+    /* Breathing room between sections */
+    margin-top: 2.6em;
     font-size: 1.35rem !important;
     text-transform: uppercase;
     padding-left: 0.7rem;

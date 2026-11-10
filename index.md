@@ -3,8 +3,6 @@ title: Home
 layout: home
 ---
 
-Welcome to my website!
-
 ## About Me
 
 AI MSc from the University of Amsterdam. AI Security, Robotics. ML Engineer and Founder.
@@ -12,6 +10,7 @@ AI MSc from the University of Amsterdam. AI Security, Robotics. ML Engineer and 
 Feel free to reach out to me:
 
 - [LinkedIn]
+- [Google Scholar]
 
 ## Selected projects, papers and blogposts
 
@@ -38,6 +37,7 @@ Feel free to reach out to me:
 [Beyond Reproducibility: Advancing Zero-shot LLM Reranking Efficiency with Setwise Insertion]: https://dl.acm.org/doi/10.1145/3726302.3730323
 [Read Your Own Mind: Reasoning Helps Surface Self-Confidence Signals in LLMs]: https://arxiv.org/abs/2505.23845
 [LinkedIn]: https://www.linkedin.com/in/jakub-podolak/
+[Google Scholar]: https://scholar.google.com/citations?user=IlPmOYgAAAAJ
 [qr2o: Virtual Grafitti Wall]: /projects.html
 [Co-organizing ML in PL Conference]: /projects.html
 [Trying to build a DIY Smartwatch]: /projects/smartwatch.html
